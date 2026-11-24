@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday やまも！</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- 1ページ目 -->
+    <section class="page active" id="page1">
+        <div class="content">
+            <div class="decorations">🎂 🎈 🌼 🎈 🎂</div>
+
+            <div class="small-title">SPECIAL DAY ♡</div>
+
+            <h1>やまも Happy Birthday！</h1>
+
+            <h2>20歳おめでとう！🎉</h2>
+
+            <p class="wish">
+                素敵な一年になりますように🍀
+            </p>
+
+            <div class="photo-container">
+                <img src="{{ url_for('static', filename='yamamo1.jpg') }}"
+                     class="birthday-photo" alt="写真1">
+
+                <img src="{{ url_for('static', filename='yamamo2.jpg') }}"
+                     class="birthday-photo" alt="写真2">
+            </div>
+
+            <div class="hearts">🌷 ✨ 💛 ✨ 🌷</div>
+
+            <button onclick="nextPage(2)">次へ ➜</button>
+        </div>
+    </section>
+
+
+    <!-- 2ページ目 -->
+    <section class="page" id="page2">
+        <div class="content">
+            <div class="decorations">🍰 🍮 🧁 🍩 🍰</div>
+
+           
+
+            <h1>🎁 誕生日プレゼントは...</h1>
+
+            <div class="present-box">
+                <h2>スイーツを食べに行こ！！🍰</h2>
+            </div>
+
+            <p class="energy-message">
+                疲れを吹っ飛ばせー！！
+            </p>
+
+            <div class="hearts">🍮 🍓 🍰 🍓 🍮</div>
+
+            <button onclick="nextPage(3)">次へ ➜</button>
+        </div>
+    </section>
+
+
+    <!-- 3ページ目 -->
+    <section class="page" id="page3">
+        <div class="content">
+            <div class="decorations">🌼 🍰 🍑 🌼 🍰</div>
+
+            <div class="small-title">LET'S GO!</div>
+
+            <h1>どこに行きたい？</h1>
+
+            <p class="choice-description">
+                気になるものを選んでね♡
+            </p>
+
+            <div class="choice-container">
+
+                <button class="choice-button"
+                        onclick="selectChoice('bread')">
+                    🥐 やまもの趣味 🎨
+                </button>
+
+                <button class="choice-button"
+                        onclick="selectChoice('okayama')">
+                    🍑 岡山にはあるのかな？
+                </button>
+
+                <button class="choice-button"
+                        onclick="selectChoice('dream')">
+                    ✨ 埋もれたい ✨
+                </button>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 4ページ目 -->
+    <section class="page" id="page4">
+        <div class="content">
+            <div class="decorations">🌼 💛 🍰 💛 🌼</div>
+
+            <div class="small-title">YOUR CHOICE</div>
+
+            <div id="result"></div>
+
+            <div class="hearts">✨ 🍀 💛 🍀 ✨</div>
+
+            <button onclick="nextPage(3)">もう一度選ぶ</button>
+
+            <button class="back-button" onclick="nextPage(1)">
+                最初に戻る
+            </button>
+        </div>
+    </section>
+
+
+    <script>
+        function nextPage(number) {
+            document.querySelectorAll(".page").forEach(page => {
+                page.classList.remove("active");
+            });
+
+            document.getElementById("page" + number).classList.add("active");
+        }
+
+
+        function selectChoice(choice) {
+
+            const choices = {
+
+                bread: {
+                    title: "🥐 やまもの趣味 🎨",
+                    name: "新大久保のパン屋さん！",
+                    message: "おいしいパンを食べに行こお",
+                    emoji: "🥐 🥖 🥯 🍞"
+                },
+
+                okayama: {
+                    title: "🍑 岡山にはあるのかな？",
+                    name: "スイパラ ",
+                    message: "甘いものいっぱい食べちゃお！！",
+                    emoji: "🍓 🍰 🍮 🧁"
+                },
+
+                dream: {
+                    title: "✨ 埋もれたい ✨",
+                    name: "Eggs 'n Things！！",
+                    message: "生クリームに埋もれよお",
+                    emoji: "🍨 🍓 🍫 🥚"
+                }
+
+            };
+
+            const selected = choices[choice];
+
+            document.getElementById("result").innerHTML = `
+                <div class="result-card">
+                    <h2>${selected.title}</h2>
+                    <div class="result-emoji">${selected.emoji}</div>
+                    <h3>${selected.name}</h3>
+                    <p>${selected.message}</p>
+                </div>
+            `;
+
+            nextPage(4);
+        }
+    </script>
+
+</body>
+</html>
